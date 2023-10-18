@@ -4,6 +4,7 @@
 #include "../headers/Game.h"
 #include "../headers/includes.h"
 #include "../headers/Interface.h"
+#include <filesystem>
 
 using namespace std;
 
@@ -37,10 +38,9 @@ void Dialog()
 
 		try
 		{
-			switch (input[0])
+			switch (toupper(input[0]))
 			{
 				case 'N':
-				case 'n':
 				{
 					newGame();
 					clearScreen();
@@ -51,7 +51,6 @@ void Dialog()
 				break;
 
 				case 'M':
-				case 'm':
 				{
 					if (NULL != current_game)
 					{
@@ -75,7 +74,6 @@ void Dialog()
 				break;
 
 				case 'S':
-				case 's':
 				{
 					if (NULL != current_game)
 					{
@@ -92,7 +90,6 @@ void Dialog()
 				break;
 
 				case 'L':
-				case 'l':
 				{
 					loadGame();
 					clearScreen();
@@ -102,7 +99,6 @@ void Dialog()
 				break;
 
 				case 'Q':
-				case 'q':
 				{
 					bRun = false;
 				}
@@ -115,9 +111,9 @@ void Dialog()
 				break;
 			}
 		}
-		catch (const exception& s)
+		catch (const exception& e)
 		{
-			s;
+			cout << e.what();
 		}
 	}
 }
@@ -247,12 +243,15 @@ void movePiece()
 
 void saveGame()
 {
-	string file_name;
+	string fileName;
 	cout << "Type file name to be saved (no extension): ";
 
-	getline(cin, file_name);
-	file_name += ".dat";
-	std::ofstream ofs(file_name);
+	getline(cin, fileName);
+	fileName += ".dat";
+
+	filesystem::path pathToGame("games/" + fileName);
+	fstream ofs(pathToGame.c_str());
+
 	if (ofs.is_open())
 	{
 		// Запишем дату и время сохранения
@@ -267,7 +266,7 @@ void saveGame()
 		}
 
 		ofs.close();
-		createNextMessage("Game saved as " + file_name + "\n");
+		createNextMessage("Game saved as " + fileName + "\n");
 	}
 	else
 	{
@@ -279,13 +278,14 @@ void saveGame()
 
 void loadGame()
 {
-	string file_name;
+	string fileName;
 	cout << "Type file name to be loaded (no extension): ";
 
-	getline(cin, file_name);
-	file_name += ".dat";
+	getline(cin, fileName);
+	fileName += ".dat";
 
-	std::ifstream ifs(file_name);
+	filesystem::path pathToGame("games/" + fileName);
+	ifstream ifs(pathToGame.c_str());
 
 	if (ifs)
 	{
@@ -353,14 +353,13 @@ void loadGame()
 		}
 
 		// Дополнительная строка после ввода пользователя
-		createNextMessage("Game loaded from " + file_name + "\n");
+		createNextMessage("Game loaded from " + fileName + "\n");
 
 		return;
 	}
 	else
 	{
-		createNextMessage("Error loading " + file_name + ". Creating a new game instead\n");
+		createNextMessage("Error loading " + fileName + ". Creating a new game instead\n");
 		current_game = new Game();
-		return;
 	}
 }
