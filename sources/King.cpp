@@ -1,12 +1,7 @@
 #include "../headers/Game.h"
 #include "../headers/King.h"
 
-char King::GetPiece()		
-{
-	return 'K';
-}
-
-std::string King::describePiece() 
+std::string King::describePiece() const 
 {
 	std::string description;
 
@@ -60,7 +55,7 @@ std::string King::describePiece()
 //	return isKingInCheck(current_game.getCurrentTurn(), intended_move, current_game);
 //}
 
-bool King::isValidMove(Position present, Position future, Game& current_game) 
+bool King::isValidMove(Position present, Position future, Game& current_game)
 {
 	bool bValid = false;
 	

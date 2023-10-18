@@ -1,12 +1,7 @@
 #include "../headers/Game.h"
 #include "../headers/Rook.h"
 
-char Rook::GetPiece() 
-{
-	return 'R';
-}
-
-std::string Rook::describePiece()
+std::string Rook::describePiece() const
 {
 	std::string description;
 
@@ -20,7 +15,7 @@ std::string Rook::describePiece()
 	return description;
 }
 
-bool Rook::isValidMove(Position present, Position future, Game& current_game) 
+bool Rook::isValidMove(Position present, Position future, Game& current_game)
 {
 	bool bValid = false;
 

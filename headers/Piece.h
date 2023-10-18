@@ -10,28 +10,34 @@ class Game;
 class Piece
 {
 public:
-	Piece(char PieceColor) : mPieceColor(PieceColor) {}
+	Piece(char color, char name) : pieceColor(color), pieceName(name) {}
 	~Piece() {}
 
-	char GetColor() {
-		return mPieceColor;
+	char GetColor() const
+	{
+		return pieceColor;
 	}
 
-	bool isWhitePiece()
+	bool isWhitePiece() const 
 	{
-		return toupper(mPieceColor) == 'W';
+		return toupper(pieceColor) == 'W';
 	}
 
-	bool isBlackPiece()
+	bool isBlackPiece() const 
 	{
-		return toupper(mPieceColor) == 'B';
+		return toupper(pieceColor) == 'B';
 	}
-	
-	virtual std::string describePiece() = 0;
-	virtual char GetPiece() = 0;
+
+	char GetPiece() const
+	{
+		return pieceName;
+	}
+
+	virtual std::string describePiece() const = 0;
 	virtual bool isValidMove(Position present, Position future, Game& current_game) = 0;
 	virtual bool isPathFree(Position startingPos, Position finishingPos, Game& current_game) = 0;
 
 protected:
-	char mPieceColor;
+	char pieceColor;
+	char pieceName;
 };

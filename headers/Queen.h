@@ -7,15 +7,13 @@ class Game;
 class Queen : public Piece
 {
 public:
-	Queen(char PieceColor) : Piece(PieceColor) {}
+	static const char queenName = 'Q';
+
+	Queen(char pieceColor) : Piece(pieceColor, queenName) {}
 	~Queen() {}
 
-	char GetPiece() override;
-
-	std::string describePiece() override;
-
+	std::string describePiece() const override;
 	bool isValidMove(Position present, Position future, Game& current_game) override;
-
 	bool isPathFree(Position startingPos, Position finishingPos, Game& current_game) override;
 
 private:

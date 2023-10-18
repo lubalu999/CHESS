@@ -7,19 +7,15 @@ class Game;
 class Pawn : public Piece
 {
 public:
-	Pawn(char PieceColor) : Piece(PieceColor) {}
+	static const char pawnName = 'P';
+
+	Pawn(char pieceColor) : Piece(pieceColor, pawnName) {}
 	~Pawn() {}
 
-	char GetPiece() override;
-
-	std::string describePiece() override;
-
+	std::string describePiece() const override;
 	bool isValidMove(Position present, Position future, Game& current_game) override;
-
 	bool isPathFree(Position startingPos, Position finishingPos, Game& current_game) override;
 
 private:
-
 	bool firstMove = false;		//для двойного хода
-
 };

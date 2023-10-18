@@ -2,12 +2,7 @@
 #include "../headers/Pawn.h"
 #include "../headers/includes.h"
 
-char Pawn::GetPiece()
-{
-	return 'P';
-}
-
-std::string Pawn::describePiece()
+std::string Pawn::describePiece() const
 {
 	std::string description;
 

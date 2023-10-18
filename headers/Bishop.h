@@ -6,15 +6,13 @@ class Game;
 class Bishop : public Piece
 {
 public:
-	Bishop(char PieceColor) : Piece(PieceColor) {}
+	static const char bishopName = 'B';
+
+	Bishop(char pieceColor) : Piece(pieceColor, bishopName) {}
 	~Bishop() {}
 
-	char GetPiece() override;
-
-	std::string describePiece() override;
-
+	std::string describePiece() const override;
 	bool isValidMove(Position present, Position future, Game& current_game) override;
-
 	bool isPathFree(Position startingPos, Position finishingPos, Game& current_game) override;
 
 private:

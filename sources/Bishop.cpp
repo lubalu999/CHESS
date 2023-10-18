@@ -1,12 +1,7 @@
 #include "../headers/Game.h"
 #include "../headers/Bishop.h"
 
-char Bishop::GetPiece()
-{
-	return 'B';
-}
-
-std::string Bishop::describePiece() 
+std::string Bishop::describePiece() const 
 {
 	std::string description;
 
@@ -20,7 +15,7 @@ std::string Bishop::describePiece()
 	return description;
 }
 
-bool Bishop::isValidMove(Position present, Position future, Game& current_game) 
+bool Bishop::isValidMove(Position present, Position future, Game& current_game)
 {
 	bool bValid = false;
 
@@ -37,7 +32,7 @@ bool Bishop::isValidMove(Position present, Position future, Game& current_game)
 	if (current_game.wouldKingBeInCheck(this, present, future, &current_game.S_enPassant) == true)
 	{
 		std::cout << "Move would put player's king in check\n";
-		return false;
+		bValid = false;
 	}
 
 	return bValid;

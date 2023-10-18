@@ -1,12 +1,7 @@
 #include "../headers/Game.h"
 #include "../headers/Queen.h"
 
-char Queen::GetPiece()
-{
-	return 'Q';
-}
-
-std::string Queen::describePiece()
+std::string Queen::describePiece() const
 {
 	std::string description;
 
@@ -20,7 +15,7 @@ std::string Queen::describePiece()
 	return description;
 }
 
-bool Queen::isValidMove(Position present, Position future, Game& current_game) 
+bool Queen::isValidMove(Position present, Position future, Game& current_game)
 {
 	bool bValid = false;
 
